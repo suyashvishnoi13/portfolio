@@ -323,9 +323,7 @@ a {
 }
 
 /* =========================================
-   4. NEW 3D SPHERE ANIMATION
-   Canvas renders the sphere and two rings.
-   No CSS particle effects or extra rings.
+   4. 3D SPHERICAL ANIMATION
 ========================================= */
 
 .hero-visual {
@@ -427,7 +425,7 @@ a {
 }
 
 .about-copy {
-  padding: 3px;
+  padding: 24px;
   align-self: stretch;
 }
 
@@ -1227,5 +1225,282 @@ a {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================================
+   16. RESEARCH PAPER SECTION
+========================================= */
+
+.research-card {
+  position: relative;
+  padding: clamp(22px, 4vw, 42px);
+  overflow: hidden;
+}
+
+.research-card::before {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  right: -110px;
+  top: -130px;
+  border-radius: 50%;
+  background: rgba(94, 234, 212, 0.08);
+  filter: blur(45px);
+  pointer-events: none;
+}
+
+.research-card-top {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 22px;
+  position: relative;
+}
+
+.research-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(94, 234, 212, 0.25);
+  background: rgba(94, 234, 212, 0.07);
+  color: var(--teal);
+  border-radius: 12px;
+}
+
+.research-label {
+  color: var(--teal);
+  font: 10px var(--mono);
+  letter-spacing: 1px;
+}
+
+.research-card > h3 {
+  max-width: 800px;
+  margin: 0 0 13px;
+  font: 600 clamp(25px, 3.4vw, 38px) / 1.2 var(--display);
+  letter-spacing: -1px;
+}
+
+.research-authors {
+  color: #e5e0f6;
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 0 0 3px;
+}
+
+.research-authors strong {
+  color: var(--teal);
+}
+
+.research-affiliation {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 0;
+}
+
+.research-summary,
+.research-contribution {
+  margin-top: 28px;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.research-summary h4,
+.research-contribution h4,
+.research-detail h4,
+.research-results-heading h4 {
+  margin: 0 0 9px;
+  font: 600 15px var(--display);
+}
+
+.research-summary p,
+.research-contribution p {
+  margin: 0;
+  color: #aaa6c1;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.research-details-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.research-detail {
+  min-width: 0;
+  position: relative;
+  padding: 19px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: rgba(19, 18, 35, 0.52);
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.research-detail:hover {
+  transform: translateY(-3px);
+  border-color: rgba(94, 234, 212, 0.35);
+}
+
+.research-detail-number {
+  display: block;
+  margin-bottom: 17px;
+  color: #77718f;
+  font: 10px var(--mono);
+}
+
+.research-detail h4 {
+  font-size: 14px;
+}
+
+.research-detail p {
+  min-height: 66px;
+  margin: 0 0 17px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.research-weight {
+  color: var(--teal);
+  font: 9px var(--mono);
+  letter-spacing: 0.2px;
+}
+
+.research-results {
+  margin-top: 25px;
+  padding: 22px;
+  border: 1px solid rgba(94, 234, 212, 0.18);
+  border-radius: 10px;
+  background: rgba(45, 212, 191, 0.035);
+}
+
+.research-results-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--teal);
+  margin-bottom: 15px;
+}
+
+.research-results-heading h4 {
+  color: #f4f2ff;
+  margin: 0;
+}
+
+.research-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.research-metrics > div {
+  padding: 19px 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: rgba(167, 139, 250, 0.045);
+}
+
+.research-metrics strong,
+.research-metrics span {
+  display: block;
+}
+
+.research-metrics strong {
+  font: 600 clamp(22px, 3vw, 31px) var(--display);
+  color: #c4b5fd;
+}
+
+.research-metrics span {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.research-note {
+  margin: 12px 0 0;
+  color: #817c9d;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.research-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.research-actions .button {
+  min-height: 46px;
+}
+
+.research-actions svg {
+  flex-shrink: 0;
+}
+
+/* =========================================
+   17. RESEARCH RESPONSIVENESS
+========================================= */
+
+@media (max-width: 900px) {
+  .research-details-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .research-detail p {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .research-card {
+    padding: 20px;
+  }
+
+  .research-label {
+    font-size: 8px;
+    line-height: 1.7;
+  }
+
+  .research-details-grid,
+  .research-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .research-summary,
+  .research-contribution,
+  .research-results {
+    padding: 17px;
+  }
+
+  .research-actions {
+    flex-direction: column;
+  }
+
+  .research-actions .button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .research-card {
+    padding: 16px;
+  }
+
+  .research-card > h3 {
+    font-size: 24px;
+  }
+
+  .research-metrics > div {
+    padding: 14px 10px;
   }
 }
