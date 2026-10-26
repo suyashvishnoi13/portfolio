@@ -1,3 +1,4 @@
+
 import React, { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { MeshDistortMaterial } from "@react-three/drei";
@@ -18,8 +19,16 @@ import {
   Monitor,
   GitBranch,
   BriefcaseBusiness,
+  BookOpen,
+  FileText,
+  ExternalLink,
+  ChartNoAxesCombined,
 } from "lucide-react";
 import "./styles.css";
+
+/* =========================================
+   PROFILE
+========================================= */
 
 const PROFILE = {
   name: "Suyash Vishnoi",
@@ -31,11 +40,8 @@ const PROFILE = {
 };
 
 /* =========================================
-   NEW 3D SPHERICAL ANIMATION
-   One sphere + triangular wireframe + two rings
-   No stars or particle systems
+   3D SPHERICAL ANIMATION
 ========================================= */
-
 
 function AnimatedOrb() {
   const coreRef = useRef(null);
@@ -55,8 +61,7 @@ function AnimatedOrb() {
 
     if (wireframeRef.current) {
       wireframeRef.current.rotation.y = t * 0.035;
-      wireframeRef.current.rotation.x =
-        Math.sin(t * 0.2) * 0.04;
+      wireframeRef.current.rotation.x = Math.sin(t * 0.2) * 0.04;
     }
   });
 
@@ -76,7 +81,6 @@ function AnimatedOrb() {
         color="#2dd4bf"
       />
 
-      {/* Animated glowing sphere */}
       <mesh ref={coreRef}>
         <sphereGeometry args={[1, 64, 64]} />
         <MeshDistortMaterial
@@ -90,7 +94,6 @@ function AnimatedOrb() {
         />
       </mesh>
 
-      {/* Subtle triangular wireframe */}
       <mesh ref={wireframeRef} scale={1.12}>
         <icosahedronGeometry args={[1, 3]} />
         <meshBasicMaterial
@@ -126,7 +129,7 @@ const projects = [
     category: "C++ • GRAPH ALGORITHMS",
     title: "MetroGo — Metro Route Planner",
     description:
-      "A C++ metro route planner that models stations and route connectivity using graph data structures and shortest-path algorithms to calculate efficient journeys.",
+      "A C++ metro route planner using graph data structures and shortest-path algorithms to calculate efficient journeys.",
     stack: ["C++", "DSA", "Graph Algorithms", "Shortest Path"],
     type: "web",
     icon: <GitBranch />,
@@ -162,7 +165,7 @@ const projects = [
     category: "COMPUTER VISION",
     title: "Image Forgery Detection",
     description:
-      "An image analysis application using deep learning to identify potential digital image forgery.",
+      "A deep-learning application to identify potential digital image forgery.",
     stack: ["Python", "ResNet", "PyTorch", "Streamlit"],
     type: "ai",
     icon: <BrainCircuit />,
@@ -270,6 +273,10 @@ const experiences = [
   },
 ];
 
+/* =========================================
+   ANIMATION VARIANTS
+========================================= */
+
 const reveal = {
   hidden: {
     opacity: 0,
@@ -316,7 +323,8 @@ function App() {
     "Hi Suyash,\n\nI visited your portfolio and would like to connect with you.\n\n"
   );
 
-  const emailHref = `mailto:${PROFILE.email}?subject=${emailSubject}&body=${emailBody}`;
+  const emailHref =
+    `mailto:${PROFILE.email}?subject=${emailSubject}&body=${emailBody}`;
 
   return (
     <div className="site-shell">
@@ -324,6 +332,7 @@ function App() {
       <div className="ambient ambient-two" />
 
       {/* NAVIGATION */}
+
       <header className="navbar">
         <a className="brand" href="#home" aria-label="Go to home">
           <span className="brand-mark">S.</span>
@@ -336,6 +345,7 @@ function App() {
           <a href="#about">About</a>
           <a href="#skills">Skills</a>
           <a href="#projects">Projects</a>
+          <a href="#research">Research</a>
           <a href="#experience">Experience</a>
         </nav>
 
@@ -346,6 +356,7 @@ function App() {
 
       <main>
         {/* HERO */}
+
         <section className="hero section-wrap" id="home">
           <div className="hero-copy">
             <motion.div
@@ -432,7 +443,8 @@ function App() {
             </motion.div>
           </div>
 
-          {/* NEW SPHERICAL ANIMATION ONLY */}
+          {/* 3D SPHERE */}
+
           <motion.div
             className="hero-visual"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -443,9 +455,7 @@ function App() {
               camera={{ position: [0, 0, 5.2], fov: 45 }}
               dpr={[1, 1.5]}
               gl={{ antialias: true, alpha: true }}
-              onCreated={({ gl }) => {
-                gl.setClearColor("#080810", 0);
-              }}
+              onCreated={({ gl }) => gl.setClearColor("#080810", 0)}
             >
               <AnimatedOrb />
             </Canvas>
@@ -453,6 +463,7 @@ function App() {
         </section>
 
         {/* ABOUT */}
+
         <section
           className="about section-wrap section-space"
           id="about"
@@ -497,62 +508,52 @@ function App() {
             </motion.div>
 
             <div className="about-highlights">
-              <motion.div
-                className="highlight-card"
-                variants={reveal}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                <Code2 />
-                <span className="highlight-number">01</span>
-                <h3>End-to-end development</h3>
-                <p>From intuitive interfaces to reliable backend APIs.</p>
-              </motion.div>
-
-              <motion.div
-                className="highlight-card"
-                variants={reveal}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                <Smartphone />
-                <span className="highlight-number">02</span>
-                <h3>Responsive by design</h3>
-                <p>Experiences designed for desktop, tablet, and mobile.</p>
-              </motion.div>
-
-              <motion.div
-                className="highlight-card"
-                variants={reveal}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                <BrainCircuit />
-                <span className="highlight-number">03</span>
-                <h3>AI as an advantage</h3>
-                <p>Practical intelligence integrated into useful products.</p>
-              </motion.div>
-
-              <motion.div
-                className="highlight-card"
-                variants={reveal}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                <GitBranch />
-                <span className="highlight-number">04</span>
-                <h3>Continuous improvement</h3>
-                <p>Iterating on code quality, usability, and performance.</p>
-              </motion.div>
+              {[
+                {
+                  icon: <Code2 />,
+                  number: "01",
+                  title: "End-to-end development",
+                  description: "From intuitive interfaces to reliable backend APIs.",
+                },
+                {
+                  icon: <Smartphone />,
+                  number: "02",
+                  title: "Responsive by design",
+                  description: "Experiences designed for desktop, tablet, and mobile.",
+                },
+                {
+                  icon: <BrainCircuit />,
+                  number: "03",
+                  title: "AI as an advantage",
+                  description: "Practical intelligence integrated into useful products.",
+                },
+                {
+                  icon: <GitBranch />,
+                  number: "04",
+                  title: "Continuous improvement",
+                  description: "Iterating on code quality, usability, and performance.",
+                },
+              ].map((item) => (
+                <motion.div
+                  className="highlight-card"
+                  key={item.number}
+                  variants={reveal}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                >
+                  {item.icon}
+                  <span className="highlight-number">{item.number}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
 
         {/* SKILLS */}
+
         <section
           className="skills section-wrap section-space"
           id="skills"
@@ -594,6 +595,7 @@ function App() {
         </section>
 
         {/* PROJECTS */}
+
         <section
           className="projects section-wrap section-space"
           id="projects"
@@ -692,16 +694,193 @@ function App() {
           </p>
         </section>
 
+        {/* RESEARCH PAPER */}
+
+        <section
+          className="research section-wrap section-space"
+          id="research"
+        >
+          <SectionHeading
+            eyebrow="04 / RESEARCH PUBLICATION"
+            title={
+              <>
+                Research meets{" "}
+                <span className="gradient-text">engineering.</span>
+              </>
+            }
+            subtitle="A collaborative research paper exploring hybrid code-clone detection using textual, token-based, structural, and semantic analysis."
+          />
+
+          <motion.article
+            className="research-card glass-card"
+            variants={reveal}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+          >
+            <div className="research-card-top">
+              <div className="research-icon">
+                <BookOpen size={24} />
+              </div>
+
+              <span className="research-label">
+                RESEARCH PAPER · SOFTWARE ENGINEERING
+              </span>
+            </div>
+
+            <h3>
+              Hybrid Code Clone Detection Using Multi-Technique Analysis
+            </h3>
+
+            <p className="research-authors">
+              Asmita Yadav · Ayush Gupta · Ayush Agarwal ·{" "}
+              <strong>Suyash Vishnoi</strong>
+            </p>
+
+            <p className="research-affiliation">
+              CSE & IT · JIIT Noida, India
+            </p>
+
+            <div className="research-summary">
+              <h4>Abstract</h4>
+              <p>
+                Code cloning can cause maintenance difficulties, redundancy,
+                and technical debt. This paper presents a hybrid code-clone
+                detection system combining textual, token-based, structural,
+                and semantic analysis to identify Type-1 through Type-4 clones.
+                It combines sequence matching and code normalization with
+                CodeBERT-based representations, aiming to balance detection
+                coverage, reliability, and computational cost.
+              </p>
+            </div>
+
+            <div className="research-details-grid">
+              <div className="research-detail">
+                <span className="research-detail-number">01</span>
+                <h4>Text-based analysis</h4>
+                <p>
+                  Sequence matching for identical or nearly identical
+                  code fragments.
+                </p>
+                <span className="research-weight">Weight · 0.20</span>
+              </div>
+
+              <div className="research-detail">
+                <span className="research-detail-number">02</span>
+                <h4>Token-based analysis</h4>
+                <p>
+                  Tokenization and identifier normalization to handle
+                  renamed variables.
+                </p>
+                <span className="research-weight">Weight · 0.25</span>
+              </div>
+
+              <div className="research-detail">
+                <span className="research-detail-number">03</span>
+                <h4>Structural analysis</h4>
+                <p>
+                  Code structure comparison, including loops and
+                  conditional patterns.
+                </p>
+                <span className="research-weight">Weight · 0.20</span>
+              </div>
+
+              <div className="research-detail">
+                <span className="research-detail-number">04</span>
+                <h4>Semantic analysis</h4>
+                <p>
+                  CodeBERT embeddings to compare code with similar
+                  logical meaning.
+                </p>
+                <span className="research-weight">Weight · 0.35</span>
+              </div>
+            </div>
+
+            <div className="research-results">
+              <div className="research-results-heading">
+                <ChartNoAxesCombined size={20} />
+                <h4>Reported evaluation metrics</h4>
+              </div>
+
+              <div className="research-metrics">
+                <div>
+                  <strong>74%</strong>
+                  <span>Accuracy</span>
+                </div>
+
+                <div>
+                  <strong>0.72</strong>
+                  <span>Precision</span>
+                </div>
+
+                <div>
+                  <strong>0.69</strong>
+                  <span>Recall</span>
+                </div>
+
+                <div>
+                  <strong>0.70</strong>
+                  <span>F1 score</span>
+                </div>
+              </div>
+
+              <p className="research-note">
+                These values are taken from the paper's performance-metrics
+                table. The paper also contains a separate approximate
+                accuracy estimate in its comparison table; interpret these
+                figures in the context of the evaluation setup described
+                by the authors.
+              </p>
+            </div>
+
+            <div className="research-contribution">
+              <h4>Key contribution</h4>
+              <p>
+                A unified multi-stage pipeline aggregates complementary
+                similarity signals instead of relying on one detection
+                technique alone. The paper also discusses statistical
+                validation and the trade-off between semantic detection
+                capability and execution time.
+              </p>
+            </div>
+
+            <div className="research-actions">
+              <a
+                className="button button-primary"
+                href="/research/hybrid-code-clone-detection.docx"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FileText size={17} />
+                Read full paper
+                <ExternalLink size={15} />
+              </a>
+
+              <a
+                className="button button-secondary"
+                href="https://github.com/suyashvishnoi13/code-clone-detector"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github size={17} />
+                Related project
+              </a>
+            </div>
+          </motion.article>
+        </section>
+
         {/* EXPERIENCE */}
+
         <section
           className="experience section-wrap section-space"
           id="experience"
         >
           <SectionHeading
-            eyebrow="04 / EXPERIENCE"
+            eyebrow="05 / EXPERIENCE"
             title={
               <>
-                Learning by <span className="gradient-text">building.</span>
+                Learning by{" "}
+                <span className="gradient-text">building.</span>
               </>
             }
             subtitle="Hands-on experience across web development, software engineering, and data science."
@@ -745,6 +924,7 @@ function App() {
         </section>
 
         {/* CONTACT */}
+
         <section
           className="contact section-wrap section-space"
           id="contact"
@@ -756,7 +936,7 @@ function App() {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <span className="eyebrow">05 / WHAT'S NEXT?</span>
+            <span className="eyebrow">06 / WHAT'S NEXT?</span>
 
             <div className="contact-decoration">
               <BriefcaseBusiness size={22} />
@@ -807,6 +987,7 @@ function App() {
       </main>
 
       {/* FOOTER */}
+
       <footer className="footer section-wrap">
         <a className="brand" href="#home">
           <span className="brand-mark">S.</span>
